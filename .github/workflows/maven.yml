@@ -33,7 +33,7 @@ jobs:
       run: | 
         sudo /etc/init.d/mysql start
         mysql -uroot -proot < sql/create-messages.sql
-        mvn --batch-mode --update-snapshots datanucleus:enhance datanucleus:schema-create
+        mvn --batch-mode --update-snapshots compile datanucleus:enhance datanucleus:schema-create
     
     - name: Build with Maven
       run: mvn -B verify -Pintegration-tests
