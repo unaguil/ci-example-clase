@@ -29,11 +29,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
+      uses: actions/cache@v3
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
     - name: Prepare database for integration tests
       run: | 
         sudo /etc/init.d/mysql start
@@ -42,6 +42,6 @@ jobs:
     
     - name: Build with Maven
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify -Pintegration-tests org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=unaguil_ci-example-clase
